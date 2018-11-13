@@ -1,4 +1,6 @@
 package com.gupaoedu.vip.pattern.factory.pojo;
 
-public class Milk {
+public interface Milk {
+    void showName();
 }
+
