@@ -16,7 +16,7 @@ public class ThreadSafeTest   {
      * @param args
      */
     public static void main(String[] args) {
-        int count = 2;
+        int count = 200;
         CountDownLatch countDownLatch = new CountDownLatch(count);
         for (int i = 0; i < count; i++) {
             new Thread() {
@@ -28,11 +28,11 @@ public class ThreadSafeTest   {
 //                        LazyOne instance = LazyOne.getInstance();//懒汉模式一，出现了两个实例对象
 //                        LazyTwo instance = LazyTwo.getInstance();//懒汉模式二，一直是一个实例对象，但性能差
 //                        LazyThree instance = LazyThree.getInstance();//懒汉模式二，一直是一个实例对象，但性能好
-//                        RegisterMap instance = RegisterMap.getInstance();//注册模式
-                        Seriable instance = Seriable.getInstance();//序列化模式
+                        RegisterMap instance = RegisterMap.getInstance();//注册模式
+//                        Seriable instance = Seriable.getInstance();//序列化模式
                         long currTimes = System.currentTimeMillis();
                     System.out.println("时间："+currTimes+"，实例为："+instance);
-                    } catch (InterruptedException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
