@@ -1,0 +1,10 @@
+*jdbc和C#的ado差不多
+
+*jdbc整体过程：
+ 通过jdbc驱动获取connection
+ 通过connection创建Statement、PreparedStatement、CallableStatement对象
+ 通过上述3个对象执行响应方法即可得到相应结果
+ 关闭相应的对象
+
+*具体区别详见传智基础《day17》
+
