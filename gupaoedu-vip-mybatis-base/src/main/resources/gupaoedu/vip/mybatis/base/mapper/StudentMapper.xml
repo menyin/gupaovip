@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gupaoedu.vip.mybatis.base.mapper.StudentMapper">
+    <resultMap id="resultMap" type="gupaoedu.vip.mybatis.base.pojo.Student">
+        <id property="id" column="id"/>
+        <result property="name" column="NAME" typeHandler="gupaoedu.vip.mybatis.typehandler.ExampleTypeHandler"/>
+        <result property="address" column="address"/>
+    </resultMap>
+    <select id="getStudentById" resultMap="resultMap">
+        select * from student where id = #{id}
+    </select>
+    <insert id="insertStudent" >
+        INSERT INTO student(id,Name,address) VALUES (#{id},#{name, typeHandler=gupaoedu.vip.mybatis.typehandler.ExampleTypeHandler},#{address})
+    </insert>
+</mapper>
