@@ -1,0 +1,18 @@
+课后作业
+1. Mapper在spring管理下其实是单例，为什么可以是一个
+单例？ SCOPE -> application
+ 答：spring集成Mapper是以单例形式统一管理，有利于复用和节省资源。 spring又将Mapper所需的sqlsession实例绑定在ThreadLocal的实例上。
+     使得不同线程访问时使用的sqlsession实例是一个单独的副本，不会相互影响。所以可以保证Mapper是单例也没有问题。
+     实现原理详见：https://blog.csdn.net/weixin_39276098/article/details/78706287
+
+2. MyBatis在Spring集成下没有mapper的xml文件会不会报错，为什么？
+ 答：不会，因为spring集成Mybatis时，sql语句有xml和annotation两种映射方式，没有xml，可以用annotation。
+
+3. TypeHandler手写
+ 答：详见：https://github.com/menyin/gupaovip/blob/master/gupaoedu-vip-mybatis-base/src/test/java/gupaoedu/vip/mybatis/typehandler/UnitTest.java
+
+4. 手写Plugin,多个interceptor到底谁先执行？顺序由谁决定的？
+ 答：*实例详见：https://github.com/menyin/gupaovip/blob/master/gupaoedu-vip-mybatis-base/src/test/java/gupaoedu/vip/mybatis/plugns/UnitTest.java
+     mybatis的插件是通过对原始mybatis执行过程中相关对象做代理，所以后写的plugin后包装代理，在最外层。
+     程序运行过程中，又外到内依次执行，所以后写的plugin的拦截代码是先执行。
+     注：mybatis原理请看CSDN收藏《Mybatis之工作原理》、博客园收藏《MyBatis插件原理----从<plugins>解析开始》
