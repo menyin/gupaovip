@@ -8,6 +8,10 @@
     <typeHandlers>
         <typeHandler handler="gupaoedu.vip.mybatis.typehandler.ExampleTypeHandler"/>
     </typeHandlers>
+    <plugins>
+        <plugin interceptor="gupaoedu.vip.mybatis.plugns.ExamplePlugin1"/>
+        <plugin interceptor="gupaoedu.vip.mybatis.plugns.ExamplePlugin2"/>
+    </plugins>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -23,4 +27,5 @@
         <mapper resource="gupaoedu/vip/mybatis/base/mapper/PersonMapper.xml"/>
         <mapper resource="gupaoedu/vip/mybatis/base/mapper/StudentMapper.xml"/>
     </mappers>
+
 </configuration>
