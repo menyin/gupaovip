@@ -1,4 +1,5 @@
 课后作业
+*源码分析作业 20180324
 1. Mapper在spring管理下其实是单例，为什么可以是一个
 单例？ SCOPE -> application
  答：spring集成Mapper是以单例形式统一管理，有利于复用和节省资源。 spring又将Mapper所需的sqlsession实例绑定在ThreadLocal的实例上。
@@ -16,3 +17,38 @@
      mybatis的插件是通过对原始mybatis执行过程中相关对象做代理，所以后写的plugin后包装代理，在最外层。
      程序运行过程中，又外到内依次执行，所以后写的plugin的拦截代码是先执行。
      注：mybatis原理请看CSDN收藏《Mybatis之工作原理》、博客园收藏《MyBatis插件原理----从<plugins>解析开始》
+
+*20180328作业
+1.怎么验证一级缓存的存在？
+ 答：一次会话中，连续进行两次相同的查询，看第二次查询的时间，是否短于第一次查询
+
+2.验证N+1问题
+ 答：N+1问题：查询主数据，是1次查询，假设这1次查询出n条记录；根据这n条主记录，查询从记录，共需要n次，所以叫数据库1+n问题
+
+3.如何验证：嵌套查询，打印日志
+ 答：https://blog.csdn.net/wangjun5159/article/details/52389480
+
+*20180328作业
+1.org.apache.ibatis.binding.MapperProxy#invoke 这个类的53行什么时候执行？
+ 答：其实就是jdk1.8之后，接口新增了一个特性，接口方法可以有默认实现，以达到接口扩展新的方法后不影响以前实现它的类。
+     所以53行代码就是判断是否是接口中有默认实现的方法。
+
+
+*源码分析作业 20180331
+1. TestMapper 作者为什么要设计这样的形式来做？
+为什么不是一个class而是一个interface?
+ 答：首先使用 interface 接口已经可以满足，根据全限定名+方法名找到对应的SQL语句，然后MapperProxy代理实现具体的执行
+     所有的执行套路都是一样的，通过interface就可以统一动态生成代理的class，这样可节省开发者代码，提升效率。
+
+2.org.apache.ibatis.executor.BaseExecutor#queryFromDatabase 322行这行代码的意义
+
+3.MyBatis的plugin实现机制
+  通过对指定范围（Executor、ParameterHandler、ResultSetHandler、StatementHandler）的对象进行动态代理，从而对这些对象的方法进行拦截。
+  换句话说就是每个插件都是对原始对象的一层包装，经过层层包装产生对原始对象方法的层层拦截。
+
+4.lazy loading 是怎么做到的？
+  开启lazyloading时，当主查询有关联的嵌套查询，而是将查询条件信息缓存。
+  对查询的结果里关联的get方法进行动态代理拦截，在拦截中按照上述缓存的查询条件信息进行查询。
+  当调用get的时候就会进行实时查询。
+
+
