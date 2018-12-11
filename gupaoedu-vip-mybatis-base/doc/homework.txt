@@ -41,14 +41,21 @@
      所有的执行套路都是一样的，通过interface就可以统一动态生成代理的class，这样可节省开发者代码，提升效率。
 
 2.org.apache.ibatis.executor.BaseExecutor#queryFromDatabase 322行这行代码的意义
+ 答：占位符，防止其它地方访问同key缓存时，造成重复。
 
 3.MyBatis的plugin实现机制
   通过对指定范围（Executor、ParameterHandler、ResultSetHandler、StatementHandler）的对象进行动态代理，从而对这些对象的方法进行拦截。
   换句话说就是每个插件都是对原始对象的一层包装，经过层层包装产生对原始对象方法的层层拦截。
 
 4.lazy loading 是怎么做到的？
-  开启lazyloading时，当主查询有关联的嵌套查询，而是将查询条件信息缓存。
-  对查询的结果里关联的get方法进行动态代理拦截，在拦截中按照上述缓存的查询条件信息进行查询。
-  当调用get的时候就会进行实时查询。
+ 答：开启lazyloading时，当主查询有关联的嵌套查询，而是将查询条件信息缓存。
+   对查询的结果里关联的get方法进行动态代理拦截，在拦截中按照上述缓存的查询条件信息进行查询。
+   当调用get的时候就会进行实时查询。
+
+*课后作业 20180401
+ 1. 手写1.0
+ 2. 2.0版本的基础上，用annotation
+ 答：详见 https://github.com/menyin/gupaovip/tree/master/gupaoedu-vip-mybatis-base/src/main/java/gupaoedu/vip/mybatis/mymybatis
+
 
 
