@@ -3,12 +3,13 @@ package gupaoedu.vip.mybatis.plugns;
 import gupaoedu.vip.mybatis.base.mapper.StudentMapper;
 import gupaoedu.vip.mybatis.base.pojo.Student;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.session.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 public class UnitTest {
     public static void main(String[] args) {
@@ -21,6 +22,7 @@ public class UnitTest {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
             Student student = mapper.getStudentById(1);
             System.out.println(student);
+
 
         } catch (IOException e) {
             e.printStackTrace();
