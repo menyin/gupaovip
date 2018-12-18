@@ -1,0 +1,7 @@
+@startuml
+A -> B: 调用b.do()
+B --> B: 调用b.re()
+B --> C: 调用c.do()
+C --> D: 调用d.do()
+
+@enduml
