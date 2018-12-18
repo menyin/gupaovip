@@ -1,10 +1,10 @@
 package com.gupaoedu.vip.spring.v1.framework.servlet;
 
-import com.gupaoedu.vip.spring.v1.framework.servlet.annotation.Autowrire;
-import com.gupaoedu.vip.spring.v1.framework.servlet.annotation.Controller;
-import com.gupaoedu.vip.spring.v1.framework.servlet.annotation.Mapping;
-import com.gupaoedu.vip.spring.v1.framework.servlet.annotation.Service;
-import com.gupaoedu.vip.spring.v1.framework.servlet.bingding.Handler;
+import com.gupaoedu.vip.spring.v1.framework.annotation.Autowrire;
+import com.gupaoedu.vip.spring.v1.framework.annotation.Controller;
+import com.gupaoedu.vip.spring.v1.framework.annotation.Mapping;
+import com.gupaoedu.vip.spring.v1.framework.annotation.Service;
+import com.gupaoedu.vip.spring.v1.framework.bingding.Handler;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

@@ -1,4 +1,4 @@
-package com.gupaoedu.vip.spring.v1.framework.servlet.bingding;
+package com.gupaoedu.vip.spring.v1.framework.bingding;
 
 import java.lang.reflect.Method;
 

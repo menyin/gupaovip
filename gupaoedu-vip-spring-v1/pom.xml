@@ -11,11 +11,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spring-v1</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
     <name>spring-v1 Maven Webapp</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
+    <modules>
+        <module>../gupaoedu-vip-spring-v2</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

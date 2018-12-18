@@ -1,4 +1,4 @@
-package com.gupaoedu.vip.spring.v1.framework.servlet.annotation;
+package com.gupaoedu.vip.spring.v1.framework.annotation;
 
 import java.lang.annotation.*;
 

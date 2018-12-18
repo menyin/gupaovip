@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
     <servlet-name>dispatchServlet</servlet-name>
-    <servlet-class>com.gupaoedu.vip.spring.v1.framework.servlet.DispatchServlet</servlet-class>
+    <servlet-class>com.gupaoedu.vip.spring.v1.framework.DispatchServlet</servlet-class>
       <init-param>
           <param-name>contextConfigLocation</param-name>
           <param-value>classpath:application.properties</param-value>
