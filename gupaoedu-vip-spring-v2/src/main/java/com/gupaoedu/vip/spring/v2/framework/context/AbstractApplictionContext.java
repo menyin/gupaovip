@@ -4,4 +4,6 @@ public abstract class AbstractApplictionContext {
     protected void onRefresh() {
     }
     protected abstract void refreshBeanfactory();
+
+
 }

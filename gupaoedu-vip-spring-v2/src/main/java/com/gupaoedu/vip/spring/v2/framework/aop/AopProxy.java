@@ -19,10 +19,21 @@ public class AopProxy implements InvocationHandler {
     }
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        //此处应注意，在aopConfig存储对象方法与切面的关系时是存储原生对象的方法，而此处的method是原生对象的接口的方法。
+        Method originMehtod = target.getClass().getMethod(method.getName(), method.getParameterTypes());
+
         //根据aopConfig配置的信息进行拦截
-        System.out.println("根据aopConfig配置的信息进行拦截");
-        Object invoke = method.invoke(target, args);
-        return invoke;
+        if (aopConfig != null && aopConfig.contains(originMehtod)) {
+            AopConfig.Aspect aspect = aopConfig.get(originMehtod);
+            Method[] methods = aspect.getMethods();
+            methods[0].invoke(aspect.getAspect());
+            Object invoke = method.invoke(target, args);
+            methods[1].invoke(aspect.getAspect());
+            return invoke;
+        } else {
+            Object invoke = method.invoke(target, args);
+            return invoke;
+        }
     }
 
 }

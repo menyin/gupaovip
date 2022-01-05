@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 发布dubbo服务 -->
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="gupaoedu-vip-dubbo-base-server" />
+
+    <!-- 注册中心的地址 -->
+    <dubbo:registry protocol="zookeeper" address="192.168.1.245:2181,192.168.1.245:2182,192.168.1.245:2183"/>
+
+
+
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <!--<dubbo:protocol name="hessian" port="20881" />-->
+    <dubbo:protocol name="dubbo" port="20881" />
+
+    <!-- 声明需要暴露的服务接口 -->
+    <!--基本调用测试-->
+    <dubbo:service interface="com.gupaoedu.vip.base.server.basetest.Hello" ref="helloImpl" timeout="3000"/>
+    <bean id="helloImpl" class="com.gupaoedu.vip.base.server.basetest.HelloImpl" />
+
+    <!--version测试-->
+    <dubbo:service interface="com.gupaoedu.vip.base.server.basetest.Hello" ref="helloImpl1" version="0.0.1"  timeout="3000"/>
+    <bean id="helloImpl1" class="com.gupaoedu.vip.base.server.versiontest.HelloImpl1" />
+    <dubbo:service interface="com.gupaoedu.vip.base.server.basetest.Hello" ref="helloImpl2" version="0.0.2"  timeout="3000"/>
+    <bean id="helloImpl2" class="com.gupaoedu.vip.base.server.versiontest.HelloImpl2" />
+</beans>

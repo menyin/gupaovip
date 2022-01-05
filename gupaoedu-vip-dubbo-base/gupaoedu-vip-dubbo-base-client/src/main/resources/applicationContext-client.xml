@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <!-- 发布dubbo服务 -->
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="gupaoedu-vip-dubbo-base-client" />
+
+    <!-- 注册中心的地址 -->
+    <dubbo:registry protocol="zookeeper" address="192.168.1.245:2181,192.168.1.245:2182,192.168.1.245:2183"/>
+
+    <!--基本调用测试-->
+    <dubbo:reference interface="com.gupaoedu.vip.base.server.basetest.Hello" id="hello" />
+
+    <!--version测试-->
+    <dubbo:reference interface="com.gupaoedu.vip.base.server.basetest.Hello" version="0.0.1" id="hello1" />
+    <dubbo:reference interface="com.gupaoedu.vip.base.server.basetest.Hello" version="0.0.2" id="hello2" />
+    <!--mock测试 通过timeout=1构建错误-->
+    <dubbo:reference interface="com.gupaoedu.vip.base.server.basetest.Hello" id="helloMock" mock="com.gupaoedu.vip.base.client.mocktest.HelloMockImpl" timeout="1"/>
+
+    <dubbo:reference interface="com.gupaoedu.vip.base.server.basetest.Hello" id="helloCluster" timeout="1" cluster="failover"/>
+
+</beans>

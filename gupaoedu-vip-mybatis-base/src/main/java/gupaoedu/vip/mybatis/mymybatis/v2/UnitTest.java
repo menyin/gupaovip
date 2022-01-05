@@ -22,6 +22,9 @@ public class UnitTest {
         PersonMapper mapper = sqlsession.getMapper(PersonMapper.class);
         Person person = mapper.getPersonById("1");
         System.out.println(person.getName());
+       Boolean iss=false;
+        boolean is=iss;
+
 
     }
 }

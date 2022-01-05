@@ -1,5 +1,7 @@
 package com.gupaoedu.vip.spring.v2.framework.context.suport;
 
+import com.gupaoedu.vip.spring.v2.framework.annotation.Controller;
+import com.gupaoedu.vip.spring.v2.framework.annotation.Service;
 import com.gupaoedu.vip.spring.v2.framework.beans.BeanDefinition;
 
 import java.io.File;
@@ -45,7 +47,16 @@ public class BeanDifinitionReader {
                 doScanner(packName + "." + file.getName());
             } else {
                 //这里应该要加上注解过滤，有注解的才加载进去
-                registyBeanClasses.add((packName + "." + file.getName()).replace(".class", ""));
+                String fullName = (packName + "." + file.getName()).replace(".class", "");
+                try {
+                    Class<?> aClass = Class.forName(fullName);
+                    if (aClass.isAnnotationPresent(Controller.class)||aClass.isAnnotationPresent(Service.class)) {
+                        registyBeanClasses.add(fullName);
+                    }
+
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -69,5 +80,9 @@ public class BeanDifinitionReader {
         char[] chars = str.toCharArray();
         chars[0] += 32;
         return String.valueOf(chars);
+    }
+
+    public Properties getConfig() {
+        return config;
     }
 }

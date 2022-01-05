@@ -6,7 +6,12 @@
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd" default-lazy-init="true">
     <bean id="person" class="gupaoedu.vip.spring.base.pojo.Person"/>
+    <!--<bean id="eventListener" class="gupaoedu.vip.spring.event.EventListener" lazy-init="true" />-->
+    <bean id="student" class="gupaoedu.vip.spring.customerinterface.Student">
+        <property name="name" value="jack"/>
+    </bean>
+
 
 </beans>

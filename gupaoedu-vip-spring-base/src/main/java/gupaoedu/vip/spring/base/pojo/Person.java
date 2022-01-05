@@ -1,5 +1,8 @@
 package gupaoedu.vip.spring.base.pojo;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class Person {
     private String id;
     private String name;
@@ -37,4 +40,6 @@ public class Person {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+
 }

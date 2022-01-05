@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gupaoedu.vip.mybatis.base.mapper.PersonMapper">
-    <select id="getPersonById" resultType="gupaoedu.vip.mybatis.base.pojo.Person">
+    <select id="getPersonById" resultType="gupaoedu.vip.mybatis.base.pojo.gupaoedu.vip.java8demo.Person">
         select * from person where id = #{id}
     </select>
 </mapper>

@@ -26,7 +26,15 @@ public class BeanWrapper {
         return this.wrapperInstance;
     }
 
-   public void setAopConfig(AopConfig aopConfig) {
+    public Object getOriginInstance() {
+        return originInstance;
+    }
+
+    public void setOriginInstance(Object originInstance) {
+        this.originInstance = originInstance;
+    }
+
+    public void setAopConfig(AopConfig aopConfig) {
         aopProxy.setConfig(aopConfig);
     }
 
