@@ -1,17 +1,16 @@
 package gupaoedu.vip.java8demo;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class StreamsDemo {
     /**
      * stream()使得集合可以像jq那样进行链式编程。
+     * 可以实现 筛选、切片、排序、查找、匹配等功能
      * 必须注意在这中间的操作后调用宿主是否变化，如mapToInt就已经将宿主变成了IntStream
      * @param args
      */
@@ -25,7 +24,7 @@ public class StreamsDemo {
         );
         //基本使用
        /*int sum = tasks.stream()
-                .filter(t -> t.status == Status.OPEN )//？此处居然可以使用t的私有字段status，是否破坏了private语义
+                .filter(t -> t.status == Status.OPEN )//？此处居然可以使用t的私有字段status，是否破坏了private语义。！其实是.status相当于调用getStatus方法
                 .mapToInt(t -> t.points) //
                 .sum();
         System.out.println(sum);*/
@@ -40,6 +39,7 @@ public class StreamsDemo {
             }
             return t.getPoints();
         }).sum();*/
+        Arrays.stream(new int[]{});
 
         //boxed装箱
         /*int[] ints = new int[]{1,2,3};
@@ -58,8 +58,18 @@ public class StreamsDemo {
         /*HashSet<Integer> hashSet = integers.stream().collect(Collectors.toCollection(HashSet::new));*/
 //        System.out.println(list);
 
+        //无限流,相当于一个无限的迭代器，可以通过limit截断
+        //List<Integer> collect = Stream.iterate(0, x -> x + 1).limit(10).collect(Collectors.toList());
+        //System.out.println(collect);
 
-        System.in.read();
+        //截断
+        //List<Task> collect1 = tasks.stream().limit(2).collect(Collectors.toList());
+        //System.out.println(collect1);
+
+        //System.in.read();
+
+        tasks.stream().allMatch(task -> task.points % 5 == 0);
+
     }
 
     public static class Task {

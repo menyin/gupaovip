@@ -11,7 +11,7 @@ import java.io.IOException;
 public class UnitTest {
     public static void main(String[] args) throws IOException {
 
-        Person son = new Son();
+        Person son = new Son();//如果代理对象未实现任何接口则会报错
         Person sonProxy = (Person)ProxyFactory.getProxyInstance(son);
         sonProxy.findLove();
 

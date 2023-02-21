@@ -21,7 +21,7 @@ public class ReadWriteLockClass {
             return memoryMap.get(key);
         }finally {
             rLock.unlock();
-            System.out.println(Thread.currentThread().getName()+"获得了读锁");
+            System.out.println(Thread.currentThread().getName()+"释放了读锁");
         }
     }
 
