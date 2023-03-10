@@ -7,8 +7,12 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext-service.xml");
+       /* ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext-service.xml");
         applicationContext.start();
-        System.in.read();
+        System.in.read();*/
+
+        Main main = new Main();
+
+
     }
 }
