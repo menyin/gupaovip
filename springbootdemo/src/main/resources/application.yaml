@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    # config mysql
+    url: jdbc:mysql://39.108.237.61:3306/caisheng?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: Cfcny362331,,
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    # set druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 6000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 30000
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+
+# print logs
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+server:
+  max-http-header-size: 300KB
+crawler:
+  mode: mysql
+  awaitTimeout: 60000
+  cacheSize: 20
+  filePath: G:/resumes.txt

@@ -5,6 +5,7 @@ import org.apache.commons.io.input.ReversedLinesFileReader;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.StringUtils;
@@ -17,6 +18,8 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.nio.charset.Charset;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
@@ -27,7 +30,9 @@ import java.util.stream.Collectors;
  * @date: 2023年03月10日 8:54
  */
 
-@RestController
+@RestController()
+@RequestMapping("/mysql")
+@ConditionalOnProperty(prefix = "crawler",name = "mode",havingValue = "file")
 public class ResumesController implements ApplicationContextAware {
 
     @Value("${crawler.awaitTimeout}")
@@ -52,11 +57,12 @@ public class ResumesController implements ApplicationContextAware {
         if(lastJson!=null&&!StringUtils.isEmpty(lastJson)){
             JSONObject jsonObject = JSONObject.parseObject(lastJson);
             Integer page = jsonObject.getInteger("page");
+            String regDate = jsonObject.getString("regDate");
             if(page!=null){
-                return callback + "({\"status\":\"1\",\"page\" : \"" + page + "\"})";
+                return callback + "({\"status\":\"1\",\"page\" : \"" + page + "\",\"regDate\" : \"" + regDate + "\"})";
             }
         }
-        return callback + "({\"status\":\"0\",\"page\" : \"" + 0 + "\"})";
+        return callback + "({\"status\":\"0\",\"page\" : \"" + 0 + "\",\"regDate\" : \"" +new Date().toLocaleString().split(" ")[0] + "\"})";
     }
 
     /**
