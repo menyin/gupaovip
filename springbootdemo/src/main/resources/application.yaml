@@ -32,5 +32,5 @@ server:
 crawler:
   mode: mysql
   awaitTimeout: 60000
-  cacheSize: 20
+  cacheSize: 40
   filePath: G:/resumes.txt

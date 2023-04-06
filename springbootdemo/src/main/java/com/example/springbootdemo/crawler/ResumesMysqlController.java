@@ -38,7 +38,7 @@ public class ResumesMysqlController {
     @Value("${crawler.awaitTimeout}")
     private Integer awaitTimeout=20000;
     @Value("${crawler.cacheSize}")
-    private Integer cacheSize=20;
+    private Integer cacheSize=40;
     @Value("${crawler.filePath}")
     private String filePath="G:/resumetTest.txt";
 
