@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.springbootdemo.entity.Company;
 import com.example.springbootdemo.mapper.CompanyMapper;
+import com.example.springbootdemo.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.*;
 
@@ -25,6 +27,8 @@ import java.util.concurrent.*;
 @RequestMapping("/company/mysql")
 @ConditionalOnProperty(prefix = "crawler",name = "mode",havingValue = "mysql")
 public class CompanysMysqlController {
+    @Autowired
+    private CompanyService companyService;
     @Autowired
     private CompanyMapper companyMapper;
     @Value("${crawler.awaitTimeout}")
@@ -112,6 +116,27 @@ public class CompanysMysqlController {
             }
         });
     }
+    public void writeJsons1() {
+        int size = cacheList.size();
+        if (size == 0) {
+            return;
+        }
+        ArrayList<Company> companies = new ArrayList<>();
+
+        for (int i = 0; i < size; i++) {
+            String json = null;
+            try {
+                json = cacheList.take();
+                Company company = JSONObject.parseObject(json, Company.class);
+                companies.add(company);
+//                companyMapper.insert(company);
+            } catch (InterruptedException e) {
+                System.out.println("获取cacheList元素出现异常...");
+            }
+        }
+        companyService.saveBatch(companies);
+        System.out.println("缓冲区已满，执行一次写入...");
+    }
 
     /**
      * 使用FileOutputStream来写入txt文件
@@ -121,7 +146,6 @@ public class CompanysMysqlController {
         if (size == 0) {
             return;
         }
-
         for (int i = 0; i < size; i++) {
             String json = null;
             try {
@@ -135,5 +159,8 @@ public class CompanysMysqlController {
         }
         System.out.println("缓冲区已满，执行一次写入...");
     }
+
+
+
 
 }

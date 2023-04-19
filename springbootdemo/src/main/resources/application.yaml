@@ -1,7 +1,8 @@
 spring:
   datasource:
     # config mysql
-    url: jdbc:mysql://39.108.237.61:3306/caisheng?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    #url: jdbc:mysql://39.108.237.61:3306/caisheng?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3306/caisheng?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: Cfcny362331,,
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -31,6 +32,6 @@ server:
   max-http-header-size: 300KB
 crawler:
   mode: mysql
-  awaitTimeout: 60000
-  cacheSize: 40
+  awaitTimeout: 13000
+  cacheSize: 20
   filePath: G:/resumes.txt
