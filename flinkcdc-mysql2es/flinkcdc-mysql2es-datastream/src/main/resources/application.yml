@@ -1,0 +1,15 @@
+server:
+  port: 9001
+mysql-cdc-es:
+  infos:
+  ip: 127.0.0.1
+  port: 3306
+#  dbs: mytest
+  dbs: caisheng
+  user: flinkcdc0
+  pwd: flinkcdc0
+  tables: ${mysql-cdc-es.dbs}.company
+spring:
+  elasticsearch:
+    uris: http://localhost:9200
+
