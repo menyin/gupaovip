@@ -11,7 +11,12 @@ public class LockDemo2 {
     static ReentrantLock reentrantLock = new ReentrantLock(true);
 
     public static void main(String[] args) {
-        for (int i = 0; i <30; i++) {
+        for (int i = 0; i <10; i++) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             new Thread(new DemoThread(),"thread-"+i).start();
         }
 
@@ -22,6 +27,11 @@ public class LockDemo2 {
         public void run() {
             System.out.println(Thread.currentThread().getName()+"等待锁");
             reentrantLock.lock();
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
                 System.out.println(Thread.currentThread().getName()+"抢到锁");
             reentrantLock.unlock();
         }

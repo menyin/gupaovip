@@ -16,6 +16,7 @@ public class ProxyFactory {
                         System.out.println(method);
                         System.out.println(args);*/
                         System.out.println("日志记录begin");
+                        System.out.println(proxy.equals(target));
                         Object result = method.invoke(target, args);
                         System.out.println("日志记录end");
                         return result;

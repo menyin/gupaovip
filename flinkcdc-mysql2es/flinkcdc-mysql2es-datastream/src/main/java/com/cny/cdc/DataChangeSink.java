@@ -13,6 +13,7 @@ import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.flink.table.planner.plan.utils.OperatorType;
 import org.springframework.stereotype.Component;
 import com.cny.cdc.domain.companys.entity.Company;
+import scala.Array;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -519,6 +520,7 @@ public class DataChangeSink implements SinkFunction<DataChangeInfo> {
         return companyIndex;
         /*公司认证信息 CompanyLicenceinfoData  end*/
 
+
     }
 
 
@@ -545,6 +547,8 @@ public class DataChangeSink implements SinkFunction<DataChangeInfo> {
      */
     public static List<String> extractUidAndUsername(String html) {
         List<String> results = new ArrayList<>();
+        Array array=new Array<String>(3);
+        array[0]="11";
         String regex = "<a\\s+href=\"/companyinfo/companyinfo\\.html\\?type=3&act=view&c_id=(\\w+)&uid=(\\w+)#followList\"\\s+class=\"text-link\"\\s+target=\"_blank\"><strong>(.+?)</strong></a>";
 
         Pattern pattern = Pattern.compile(regex);

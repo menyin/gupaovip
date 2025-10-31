@@ -8,6 +8,7 @@ package gupaoedu.vip.concurrent.demo;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -23,6 +24,7 @@ public class SynchronizedTest {
         }
     }
     public  void testSyncBlock(){
+new LinkedBlockingQueue<String>().
 
         try {
             synchronized(SynchronizedTest.class){

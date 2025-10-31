@@ -2,10 +2,7 @@ package com.alibaba.fastjson;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * fastjson的基本使用
@@ -18,6 +15,10 @@ import java.util.Map;
  */
 public class Demo4 {
     public static void main(String[] args) {
+        synchronized ()
+
+        new HashMap<String,String>();
+        new ArrayList<String>(44);
         //map不为null时
         /*HashMap<String, String> map = new HashMap<>();
         map.put("name", "jack");

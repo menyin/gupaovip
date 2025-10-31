@@ -9,7 +9,7 @@ public class WaitDemo {
                 synchronized (WaitDemo.class) {
                     System.out.println("子线程进入锁");
                     try {
-                        WaitDemo.class.wait(500);
+                        WaitDemo.class.wait(60000);
                         System.out.println("子线程被唤醒");
                     } catch (InterruptedException e) {
                         e.printStackTrace();

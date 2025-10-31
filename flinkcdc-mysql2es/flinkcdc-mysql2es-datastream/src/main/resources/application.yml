@@ -9,6 +9,7 @@ mysql-cdc-es:
   user: flinkcdc0
   pwd: flinkcdc0
   tables: ${mysql-cdc-es.dbs}.company
+
 spring:
   elasticsearch:
     uris: http://localhost:9200

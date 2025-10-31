@@ -21,7 +21,7 @@ import java.util.List;
  * @date: 2023年03月17日 16:00
  */
 @Data
-@Document(indexName = "company",replicas=1,shards = 1)
+@Document(indexName = "company_test_checkpoint",replicas=1,shards = 1)
 @Setting
 @NoArgsConstructor
 public class CompanyIndex implements Serializable {

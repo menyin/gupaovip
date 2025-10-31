@@ -5,7 +5,9 @@ import com.ververica.cdc.connectors.mysql.table.StartupOptions;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -26,8 +28,16 @@ public class MysqlEventListener implements ApplicationRunner {
         CompletableFuture.runAsync(() -> {
             try {
                 StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+                //+设置checkpoint
+                env.setRestartStrategy(RestartStrategies.fixedDelayRestart(3, 10000));
+                env.enableCheckpointing(10000);
+                env.getCheckpointConfig().setCheckpointStorage("file:///G:/flinkCDCCheckpoint");
+                env.getCheckpointConfig().enableExternalizedCheckpoints(CheckpointConfig.ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION);
+
+
+
                 // 设置2个并行源任务
-                env.setParallelism(2);
+//                env.setParallelism(2);
                 MySqlSource<DataChangeInfo> mySqlSource = buildDataChangeSource(mysqlCdcInfo);
                 DataStream<DataChangeInfo> streamSource = env
                         .fromSource(mySqlSource, WatermarkStrategy.noWatermarks(), "mysql-source")
@@ -35,6 +45,7 @@ public class MysqlEventListener implements ApplicationRunner {
                         .setParallelism(1);
                 streamSource.addSink(dataChangeSink);
                 env.executeAsync("mysql-cdc-es");
+
             } catch (Exception e) {
                 log.error("mysql --> es, Exception=", e);
             }
